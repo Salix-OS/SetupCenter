@@ -1,0 +1,13 @@
+[Desktop Entry]
+Exec=gksu /usr/sbin/setupcenter.py
+Icon=setupcenter
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Application;System;
+Encoding=UTF-8
+NoDisplay=false
+NotShowIn=KDE
+_Name=Salix Control Center
+_GenericName=Salix Control Center
+_Comment=Centralized spot for all system setup tools.

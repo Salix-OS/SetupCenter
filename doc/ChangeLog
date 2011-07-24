@@ -1,0 +1,52 @@
+* version 0.9.1 (2011-07-24)
+ - Modified SetupCenter icon
+ - SetupCenter now 'remembers' its size
+
+* version 0.9 (2011-07-24)
+ - Provided SetupCenter personalized icon
+ - Categories' icons can now be set in the Preferences dialog box
+ - Icon preview is featured in the icon selection dialog box
+ - Multiple utilities can now be opened simultaneously
+ - Any utilities still running are terminated on SetupCenter exit
+
+* version 0.8.1 (2011-07-20)
+ - Fixed slipped missing-image bug
+
+* version 0.8 (2011-07-20)
+ - Fixed Gparted and CUPS execution
+ - Added activation option to the utilities
+ - Categories name and activation can now be managed from the Preferences dialog box
+ - Customized logo can now be set in the configuration file
+
+* version 0.7 (2011-05-04)
+ - Detection of all system-wide utilities installed on the computer
+ - Detected system-wide utilities can now be managed from the Preferences dialog box
+ - No more error when one of default utilities is absent from the system.
+
+* version 0.6 (2011-03-20)
+ - Some more code cleanup
+ - Focus in global view is only on one item
+ - Added support for kdesu
+ - Cups is run as non-root user
+
+* Version 0.5 (2011-03-19)
+ - Some code cleanup
+ - Added 'sticky' configuration file
+ - Now hides empty categories
+
+* Version 0.4 (2011-03-19)
+ - Activated the single view layout icons
+
+* Version 0.3 (2011-03-18)
+ - Enlarged category clickable space around icons
+ - Added adjustable panels
+ - Added About window
+ - Added Preferences window
+ - Added choice of layout
+
+* Version 0.2 (2011-03-12)
+ - Added Error dialog
+ - Added Substitute error image if a default icon is missing from the user's theme
+
+* Version 0.1 (2011-03-11)
+ - Initial barebone release

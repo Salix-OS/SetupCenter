@@ -1,0 +1,149 @@
+# French translations for setupcenter package
+# French messages for setupcenter.
+# Copyright (C) 2011 Pierrick Le Brun
+# This file is distributed under the same license as the setupcenter package.
+# Pierrick Le Brun <akuna~at~salixos~dot~org>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-04 15:49+0200\n"
+"PO-Revision-Date: 2011-05-04 15:55+0100\n"
+"Last-Translator: Pierrick Le Brun <akuna@salixos.org>\n"
+"Language-Team: French <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/setupcenter.glade:11
+msgid "Setup Center"
+msgstr "Centre de configuration"
+
+#: src/setupcenter.glade:53
+#: src/setupcenter.desktop.in.h:2
+#: src/setupcenter-kde.desktop.in.h:2
+#: src/setupcenter_pref.py:7
+msgid "Salix Control Center"
+msgstr "Centre de contrôle Salix"
+
+#: src/setupcenter.glade:71
+msgid "Fine-tune your system-wide settings"
+msgstr "Réglage de votre configuration système"
+
+#: src/setupcenter.glade:356
+#: src/setupcenter_pref.py:13
+msgid "Desktop"
+msgstr "Bureau"
+
+#: src/setupcenter.glade:408
+#: src/setupcenter_pref.py:14
+msgid "Hardware"
+msgstr "Matériel"
+
+#: src/setupcenter.glade:460
+#: src/setupcenter_pref.py:15
+msgid "Software"
+msgstr "Logiciel"
+
+#: src/setupcenter.glade:510
+#: src/setupcenter_pref.py:16
+msgid "System"
+msgstr "Système"
+
+#: src/setupcenter.glade:561
+#: src/setupcenter_pref.py:17
+msgid "Other"
+msgstr "Autre"
+
+#: src/setupcenter.glade:612
+msgid "Divers"
+msgstr "Divers"
+
+#: src/setupcenter.glade:737
+msgid "About Setup Center"
+msgstr "À propos du Centre de configuration"
+
+#: src/setupcenter.glade:748
+msgid ""
+"A configurable centralized Control Panel\n"
+"\n"
+"Copyright © 2011 Pierrick Le Brun"
+msgstr ""
+"Un panneau de configuration centralisé personnalisable\n"
+"\n"
+"Copyright © 2011 Pierrick Le Brun"
+
+#: src/setupcenter.glade:753
+msgid ""
+"This program is free software; you can redistribute it \n"
+"and/or modify it under the terms of the GNU General\n"
+"Public License as published by the Free Software \n"
+"Foundation; either version 2 of the License, or (at your \n"
+"option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be \n"
+"useful, but WITHOUT ANY WARRANTY; without even\n"
+"the implied warranty of MERCHANTABILITY or FITNESS\n"
+"FOR A PARTICULAR PURPOSE.  See the GNU General \n"
+"Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General \n"
+"Public License along with this program; if not, write to \n"
+"the Free Software Foundation, Inc., 51 Franklin Street, \n"
+"Fifth Floor, Boston, MA 02110-1301, USA."
+msgstr ""
+"Ce programme est un logiciel libre ; vous pouvez le redistribuer \n"
+"et/ou le modifier conformément aux dispositions de la Licence Publique\n"
+"Générale GNU, telle que publiée par la Free Software Foundation ; \n"
+"version 2 de la licence, ou encore (à votre choix) toute version ultérieure.\n"
+"\n"
+"Ce programme est distribué dans l’espoir qu’il sera utile, mais SANS \n"
+"AUCUNE GARANTIE ; sans même la garantie implicite de COMMERCIALISATION \n"
+"ou D’ADAPTATION A UN OBJET PARTICULIER. Pour plus de détails, voir la \n"
+"Licence Publique Générale GNU.\n"
+"\n"
+"Un exemplaire de la Licence Publique Générale GNU doit être fourni avec \n"
+"ce programme ; si ce n’est pas le cas, écrivez à la Free Software \n"
+"Foundation Inc., 675 Mass Ave, Cambridge, MA 02139, Etats-Unis."
+
+#: src/setupcenter.glade:770
+msgid "translator-credits"
+msgstr "Pierrick Le Brun"
+
+#: src/setupcenter.glade:989
+msgid "Preferences"
+msgstr "Préférences"
+
+#: src/setupcenter.glade:1060
+msgid "Single view"
+msgstr "Affichage global"
+
+#: src/setupcenter.glade:1073
+msgid "View by category"
+msgstr "Affichage par catégorie"
+
+#: src/setupcenter.py:217
+msgid "None..."
+msgstr "Aucune..."
+
+#: src/setupcenter.py:446
+msgid ""
+"<b>Sorry!</b> \n"
+"\n"
+"Root privileges are required to access the Setup Center. "
+msgstr ""
+"<b>Désolé!</b> \n"
+"\n"
+"Les droits d'utilisateurs (root) sont requis pour accéder au centre de configuration"
+
+#: src/setupcenter.desktop.in.h:1
+#: src/setupcenter-kde.desktop.in.h:1
+msgid "Centralized spot for all system setup tools."
+msgstr "Panneau centralisé pour tous les utilitaires de configuration du système."
+
+#: src/setupcenter_pref.py:18
+msgid "Custom"
+msgstr "Personnalisé"
+
