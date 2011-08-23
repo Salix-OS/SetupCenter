@@ -5,7 +5,7 @@ cd $(dirname $0)
 mkdir -p pkg
 export DESTDIR=$PWD/pkg
 ./install.sh
-VER=$(grep 'version =' src/setupcenter.py | head -n 1 | sed "s/.*'\(.*\)'/\1/")
+VER=$(grep 'version =' src/setupcenter.py | head -n 1 | sed "s/.*'\(.*\)'/\1/" | tr -d '-')
 cd pkg
 cat <<EOF > install/slack-desc
 setupcenter: SetupCenter - A centralized setup panel.
