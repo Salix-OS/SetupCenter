@@ -607,7 +607,8 @@ class SetupCenter:
         Action when the activated check is toggled in the utilities preferences
         """
         # Activate the toggling
-        self.AvailableCategoryListStore[path][3] = not self.AvailableCategoryListStore[path][3]
+        self.AvailableCategoryListStore[path][3] = \
+        not self.AvailableCategoryListStore[path][3]
         # Retrieve the bolean value
         value = str(self.AvailableCategoryListStore[path][3])
         # Retrieve toggled iter
@@ -617,7 +618,10 @@ class SetupCenter:
         # Retrieve the category
         toggled_category = self.AvailableCategoryListStore.get_value(iter, 0)
         # Update the configuration file
-        update_cat_status = """sed "s|\('Category """ + str(int(path) + 1) + """',_('.*'),'.*'\),.*]|\\1,""" + value + """]|" -i """ + pref_path + 'setupcenter_pref.py'
+        update_cat_status = \
+        """sed "s|\('Category """ + str(int(path) + 1) + \
+        """',_('.*'),'.*'\),.*]|\\1,""" + value + """]|" -i """ + \
+        pref_path + 'setupcenter_pref.py'
         subprocess.call(update_cat_status, shell=True)
         cat_number = int(toggled_category[-1])
         get_value_list_from_liststore(stores[cat_number-1],0)
@@ -678,7 +682,10 @@ class SetupCenter:
             for i in liststore_backup:
                 self.ActivatedCategoryListStore.append(i)
             # Also remove all utilites it contains
-            update_cat_content = """sed "s|\(cat""" + str(int(path) + 1) + """_list = \[\)'.*,|\\1'',|" -i """ + pref_path + 'setupcenter_pref.py'
+            update_cat_content = \
+            """sed "s|\(cat""" + str(int(path) + 1) + \
+            """_list = \[\)'.*,|\\1'',|" -i """ + pref_path + \
+            'setupcenter_pref.py'
             subprocess.call(update_cat_content, shell=True)
             # Remove from its own category liststore
             stores[int(path)].clear()
@@ -693,7 +700,8 @@ class SetupCenter:
             if category_name in i:
                 if not self.AvailableCategoryListStore[path][3]:
                     liststore_backup[counter][2] = "Select..."
-                liststore_backup[counter][4] = self.AvailableCategoryListStore[path][3]
+                liststore_backup[counter][4] = \
+                self.AvailableCategoryListStore[path][3]
         self.ApplicationListStore.clear()
         for i in liststore_backup:
             self.ApplicationListStore.append(i)
@@ -711,18 +719,27 @@ class SetupCenter:
         """
         # Retrieve the selected application liststore row_iter
         row_iter = self.CategoriesTreeview.get_selection().get_selected()[-1]
-        # Set the new application row value on the liststore's second column (1)
+        # Set the new application row value on the liststore's
+        # second column (1)
         self.AvailableCategoryListStore.set_value(row_iter, 1, new_text)
         # Retrieve the value of the activation parameter
-        category_activation = self.AvailableCategoryListStore.get_value(row_iter, 3)
+        category_activation = \
+        self.AvailableCategoryListStore.get_value(row_iter, 3)
         # Retrieve the value of the category
         which_category = self.AvailableCategoryListStore.get_value(row_iter, 0)
         # Update the configuration file
-        update_cat_name = """sed "s|\('Category """ + str(int(path_string) +1) + """',\)_('.*')|\\1_('""" + new_text + """')|" -i """ + pref_path + 'setupcenter_pref.py'
+        update_cat_name = \
+        """sed "s|\('Category """ + str(int(path_string) + 1) + \
+        """',\)_('.*')|\\1_('""" + new_text + """')|" -i """ + pref_path + \
+        'setupcenter_pref.py'
         subprocess.call(update_cat_name, shell=True)
         # Update the displayed category liststore (only if activated)
         if category_activation:
-            update_displayed_categories_labels(new_text,which_category,int(path_string) +1)
+            update_displayed_categories_labels(
+                new_text,
+                which_category,
+                int(path_string) + 1
+                )
             # Also update the activated category liststore
             liststore_content_backup(self.ActivatedCategoryListStore, 2)
             self.ActivatedCategoryListStore.clear()
@@ -736,7 +753,8 @@ class SetupCenter:
     def on_categories_treeview_button_press_event(self, widget, event):
         x, y = event.get_coords()
         path = self.CategoriesTreeview.get_path_at_pos(int(x), int(y))[0][0]
-        treeview_column = self.CategoriesTreeview.get_path_at_pos(int(x), int(y))[1]
+        treeview_column = \
+        self.CategoriesTreeview.get_path_at_pos(int(x), int(y))[1]
         if treeview_column.get_title() == _('Set the icon: '):
             icon_theme = gtk.icon_theme_get_default()
             try:
@@ -796,7 +814,10 @@ class SetupCenter:
                     # Update the Available category Liststore
                     self.DisplayedCategoryListStore[path][2] = new_icon_feed
                  # Update the configuration file
-                update_cat_icon = """sed "s|\('Category """ + str(int(path) +1) + """',_('.*'),\)'.*'|\\1'""" + new_icon_name + """'|" -i """ + pref_path + 'setupcenter_pref.py'
+                update_cat_icon = \
+                """sed "s|\('Category """ + str(int(path) + 1) + \
+                """',_('.*'),\)'.*'|\\1'""" + new_icon_name + \
+                """'|" -i """ + pref_path + 'setupcenter_pref.py'
                 subprocess.call(update_cat_icon, shell=True)
             new_icon_selection.destroy()
 
@@ -805,7 +826,8 @@ class SetupCenter:
         Action when the activated check is toggled in the utilities preferences
         """
         # Activate the toggling
-        self.ApplicationListStore[path][4] = not self.ApplicationListStore[path][4]
+        self.ApplicationListStore[path][4] = \
+        not self.ApplicationListStore[path][4]
         # Retrieve toggled iter
         iter = self.ApplicationListStore.get_iter(path)
         # Retrieve the name of the selected application
@@ -819,9 +841,13 @@ class SetupCenter:
                 toggled_cat_no = int(i[0].split()[-1]) - 1
         # If utility is deactivated, remove it from the preference
         # file + liststore *if* category is already set
-        if not self.ApplicationListStore[path][4] and toggled_category != "Select...":
+        if not self.ApplicationListStore[path][4] \
+        and toggled_category != "Select...":
             # Remove the application from any of the cat*_list it was in
-            remove_app_from_cat = """sed "s/'""" + toggled_app + """',//" -i """ + pref_path + 'setupcenter_pref.py'
+            remove_app_from_cat = \
+            """sed "s/'""" + toggled_app + \
+            """',//" -i """ + pref_path + \
+            'setupcenter_pref.py'
             subprocess.call(remove_app_from_cat, shell=True)
             # Remove the application from any cat*_listore
             if toggled_cat:
@@ -832,7 +858,8 @@ class SetupCenter:
                     if cat == toggled_app:
                         break
                 try:
-                    stores[toggled_cat_no].remove(stores[toggled_cat_no].get_iter((i,)))
+                    stores[toggled_cat_no].remove(
+                        stores[toggled_cat_no].get_iter((i,)))
                 except ValueError:
                     pass
             # Set the combobox line to "Select..."
