@@ -1,5 +1,11 @@
 #!/usr/bin/env python
-
+# -*- coding: utf-8 -*-
+#
+# Author: Pierrick Le Brun <akuna~AT~salixos~org>
+#         Frédéric Galusik <fredg~AT~salixos~org>
+#
+# License: GPL v3 (see COPYING for details).
+#
 # version = '0.9-alpha'
 
 ### Import & internationalization

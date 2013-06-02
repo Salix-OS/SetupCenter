@@ -1,5 +1,11 @@
 #!/usr/bin/env python
-# -*- coding:Utf-8 -*-
+# -*- coding: utf-8 -*-
+#
+# Authors: Pierrick Le Brun <akuna~AT~salixos~org>
+#          Frédéric Galusik <fredg~AT~salixos~org>
+#
+# License: GPL v3 (see COPYING for details).
+#
 
 # CONFIGURATION FILE FOR SETUPCENTER PREFERENCES
 # (if you do modify this configuration manually please respect its syntaxe
@@ -17,7 +23,7 @@ title_icon_size = 24
 about_icon_size = 128
 
 # Remembering sizes
-main_window_size = (850, 550)
+main_window_size = (850,550)
 
 # After the above initial configuration by a distribution integrating
 # SetupCenter, the following section shouldn't need further manual
