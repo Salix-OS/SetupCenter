@@ -31,6 +31,8 @@ import setupcenter_pref as pref
 
 ### Global functions
 
+liststore_content = []
+
 
 def get_value_list_from_liststore(liststore, column):
     """
@@ -39,7 +41,7 @@ def get_value_list_from_liststore(liststore, column):
     global liststore_content
     liststore_content = list()
     item = liststore.get_iter_first()
-    if item is not None:
+    if item:
         liststore_content.append(liststore.get_value(item, column))
         item = liststore.iter_next(item)
 
@@ -49,7 +51,6 @@ def liststore_content_backup(liststore, int):
     Make a backup of a liststore content.
     int is the number of columns in the liststore
     """
-    global liststore_backup
     liststore_backup = list()
     distribution = list()
     feedline = list()
