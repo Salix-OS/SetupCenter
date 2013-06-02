@@ -24,8 +24,8 @@ gtk.glade.bindtextdomain("setupcenter", "/usr/share/locale")
 gtk.glade.textdomain("setupcenter")
 
 # Path of the configuration file
-#pref_path = ""
-pref_path = "/etc/setupcenter/"
+pref_path = ""
+#pref_path = "/etc/setupcenter/"
 sys.path.append(pref_path)
 import setupcenter_pref as pref
 
@@ -39,7 +39,7 @@ def get_value_list_from_liststore(liststore, column):
     global liststore_content
     liststore_content = list()
     item = liststore.get_iter_first()
-    while (item != None):
+    if item is not None:
         liststore_content.append(liststore.get_value(item, column))
         item = liststore.iter_next(item)
 
@@ -410,7 +410,7 @@ class SetupCenter:
                 if category_feedline[0] not in liststore_content:
                     self.AvailableCategoryListStore.append(category_feedline)
                     # Also set the activated categories liststores
-                    if state_feed == True:
+                    if state_feed:
                         self.ActivatedCategoryListStore.append(
                             (cat_feed[-1],
                             name_feed)
@@ -418,7 +418,7 @@ class SetupCenter:
                 # Check if the category is empty, and if not,
                 # set the displayed category liststore:
                 try:
-                    if state_feed == True:
+                    if state_feed:
                         displayed_category_feedline = category_feedline[:3]
                         # if it throws an exception we'll pass
                         stores[i].get_iter(0)
@@ -505,7 +505,7 @@ class SetupCenter:
             self.DisplayedCategoryListStore.clear()
             old_text = liststore_backup[counter][1]
             liststore_backup[counter][1] = new_text
-            for i in liststore_backup :
+            for i in liststore_backup:
                 self.DisplayedCategoryListStore.append(i)
             # Update the categories in the utility list as well
             get_value_list_from_liststore(self.ApplicationListStore, 2)
@@ -617,11 +617,11 @@ class SetupCenter:
         # Retrieve the category
         toggled_category = self.AvailableCategoryListStore.get_value(iter, 0)
         # Update the configuration file
-        update_cat_status = """sed "s|\('Category """ + str(int(path) +1) + """',_('.*'),'.*'\),.*]|\\1,""" + value + """]|" -i """ + pref_path + 'setupcenter_pref.py'
+        update_cat_status = """sed "s|\('Category """ + str(int(path) + 1) + """',_('.*'),'.*'\),.*]|\\1,""" + value + """]|" -i """ + pref_path + 'setupcenter_pref.py'
         subprocess.call(update_cat_status, shell=True)
         cat_number = int(toggled_category[-1])
         get_value_list_from_liststore(stores[cat_number-1],0)
-        if self.AvailableCategoryListStore[path][3] == True:
+        if self.AvailableCategoryListStore[path][3]:
             # Append the category to the activated category liststore
             liststore_content_backup(self.ActivatedCategoryListStore, 2)
             self.ActivatedCategoryListStore.clear()
@@ -691,7 +691,7 @@ class SetupCenter:
         for i in cat_list:
             counter += 1
             if category_name in i:
-                if self.AvailableCategoryListStore[path][3] == False:
+                if not self.AvailableCategoryListStore[path][3]:
                     liststore_backup[counter][2] = "Select..."
                 liststore_backup[counter][4] = self.AvailableCategoryListStore[path][3]
         self.ApplicationListStore.clear()
@@ -721,12 +721,12 @@ class SetupCenter:
         update_cat_name = """sed "s|\('Category """ + str(int(path_string) +1) + """',\)_('.*')|\\1_('""" + new_text + """')|" -i """ + pref_path + 'setupcenter_pref.py'
         subprocess.call(update_cat_name, shell=True)
         # Update the displayed category liststore (only if activated)
-        if category_activation == True:
+        if category_activation:
             update_displayed_categories_labels(new_text,which_category,int(path_string) +1)
             # Also update the activated category liststore
             liststore_content_backup(self.ActivatedCategoryListStore, 2)
             self.ActivatedCategoryListStore.clear()
-            for i in liststore_backup :
+            for i in liststore_backup:
                 if i[0] == str(int(path_string) + 1):
                     i[1] = new_text
             liststore_backup.sort()
@@ -792,7 +792,7 @@ class SetupCenter:
                 new_icon_feed = get_icon(gtk.STOCK_OPEN, new_icon_name, 48)
                 self.AvailableCategoryListStore[path][2] = new_icon_feed
                 # Update the displayed category liststore (only if activated)
-                if category_activation == True:
+                if category_activation:
                     # Update the Available category Liststore
                     self.DisplayedCategoryListStore[path][2] = new_icon_feed
                  # Update the configuration file
@@ -819,7 +819,7 @@ class SetupCenter:
                 toggled_cat_no = int(i[0].split()[-1]) - 1
         # If utility is deactivated, remove it from the preference
         # file + liststore *if* category is already set
-        if self.ApplicationListStore[path][4] == False and toggled_category != "Select...":
+        if not self.ApplicationListStore[path][4] and toggled_category != "Select...":
             # Remove the application from any of the cat*_list it was in
             remove_app_from_cat = """sed "s/'""" + toggled_app + """',//" -i """ + pref_path + 'setupcenter_pref.py'
             subprocess.call(remove_app_from_cat, shell=True)
@@ -853,7 +853,7 @@ class SetupCenter:
         row_iter = self.UtilitiesTreeview.get_selection().get_selected()[-1]
         # Retrieve the value of the activation parameter
         utility_activation = self.ApplicationListStore.get_value(row_iter, 4)
-        if utility_activation == True:
+        if utility_activation:
             # Retrieve the combo new iter's value
             new_text = self.ActivatedCategoryListStore.get_value(new_iter, 1)
             # Retrieve the name of the selected application
@@ -872,7 +872,7 @@ class SetupCenter:
                     old_cat = i[0].replace('Category ', 'cat') + '_list'
                     old_cat_no = int(i[0].split()[-1]) - 1
             # Only if the new category is activated:
-            if self.AvailableCategoryListStore[new_cat_no][3] == True:
+            if self.AvailableCategoryListStore[new_cat_no][3]:
                 # Set the new application row value on the liststore's
                 # third column (2)
                 self.ApplicationListStore.set_value(row_iter, 2, new_text)
@@ -903,12 +903,12 @@ class SetupCenter:
         Action when the Preference Apply button is clicked
         """
         # Get the viewing choice and set it in the preference file
-        if self.GlobalViewRadioButton.get_active() == True:
+        if self.GlobalViewRadioButton.get_active():
             set_viewmode = "sed 's/paned/global/' -i " + pref_path + "setupcenter_pref.py"
             subprocess.call(set_viewmode, shell=True)
             self.PanedView.hide()
             self.GlobalView.show()
-        elif self.PanedViewRadioButton.get_active() == True:
+        elif self.PanedViewRadioButton.get_active():
             set_viewmode = "sed 's/global/paned/' -i " + pref_path + "setupcenter_pref.py"
             subprocess.call(set_viewmode, shell=True)
             self.GlobalView.hide()
@@ -992,7 +992,7 @@ class SetupCenter:
         Action when the exit X on the main window upper right is clicked
         """
         # Kill any utility still opened
-        while utility_process_list :
+        while utility_process_list:
             utility_process_list.pop(0).kill()
         # Window size to remember
         window_x, window_y = self.MainWindow.get_size()
@@ -1017,7 +1017,10 @@ class SetupCenter:
 if __name__ == '__main__':
     # Checks for root privileges
     if os.getuid() != 0:
-        error_dialog(_("<b>Sorry!</b> \n\nRoot privileges are required to access the Setup Center. "))
+        error_dialog(
+            _("<b>Sorry!</b>\n\nRoot privileges are required to access the Setup Center."
+            )
+        )
         sys.exit(1)
     # Executes the main program
     SetupCenter()
