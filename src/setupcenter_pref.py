@@ -36,7 +36,7 @@ viewing_mode = 'paned'
 # Categories' names, categories icons and their activation status:
 category_list = [
     ['Category 1',_('Desktop'),'display-capplet',True],
-    ['Category 2',_('Hardware'),'xvkbd',True],
+    ['Category 2',_('Hardware'),'xfpm-ups-000',True],
     ['Category 3',_('Software'),'emblem-package',True],
     ['Category 4',_('System'),'preferences-system',True],
     ['Category 5',_('Other'),'bum',True],
