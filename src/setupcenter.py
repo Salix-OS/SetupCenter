@@ -57,6 +57,7 @@ def liststore_content_backup(liststore, int):
     Make a backup of a liststore content.
     int is the number of columns in the liststore
     """
+    global liststore_backup
     liststore_backup = list()
     distribution = list()
     feedline = list()
@@ -631,7 +632,7 @@ class SetupCenter:
         pref_path + 'setupcenter_pref.py'
         subprocess.call(update_cat_status, shell=True)
         cat_number = int(toggled_category[-1])
-        get_value_list_from_liststore(stores[cat_number-1],0)
+        get_value_list_from_liststore(stores[cat_number - 1], 0)
         if self.AvailableCategoryListStore[path][3]:
             # Append the category to the activated category liststore
             liststore_content_backup(self.ActivatedCategoryListStore, 2)
@@ -639,12 +640,12 @@ class SetupCenter:
             new_feedline = [str(int(path) + 1), category_name]
             liststore_backup.append(new_feedline)
             liststore_backup.sort()
-            for i in liststore_backup :
+            for i in liststore_backup:
                 self.ActivatedCategoryListStore.append(i)
             # Display the category if it is activated and if it holds utilities
             if liststore_content != []:
                 # Display in global view
-                global_view_cat[cat_number-1].show()
+                global_view_cat[cat_number - 1].show()
                 # insert in displayed category liststore
                 liststore_content_backup(self.DisplayedCategoryListStore, 3)
                 self.DisplayedCategoryListStore.clear()
@@ -660,7 +661,7 @@ class SetupCenter:
                     self.DisplayedCategoryListStore.append(i)
         else:
             # Hide in global view
-            global_view_cat[cat_number-1].hide()
+            global_view_cat[cat_number - 1].hide()
             # Remove from the displayed category liststore
             liststore_content_backup(self.DisplayedCategoryListStore, 3)
             self.DisplayedCategoryListStore.clear()
@@ -911,7 +912,8 @@ class SetupCenter:
                 # third column (2)
                 self.ApplicationListStore.set_value(row_iter, 2, new_text)
                 # Remove the application from any of the cat*_list it was in
-                remove_app_from_cat = """sed "s/'""" + moved_app + """',//" -i """ + pref_path + 'setupcenter_pref.py'
+                remove_app_from_cat = """sed "s/'""" + moved_app \
+                + """',//" -i """ + pref_path + 'setupcenter_pref.py'
                 subprocess.call(remove_app_from_cat, shell=True)
                 # Remove the application from the old cat*_listore
                 if old_cat:
@@ -924,10 +926,12 @@ class SetupCenter:
                     stores[old_cat_no].remove(stores[old_cat_no].get_iter((i,)))
                 # Append the application in the new cat*_list
                 if new_cat:
-                    move_app_to_new_cat = """sed "s/""" + new_cat + """ = \[/""" + new_cat + """ = \['""" + moved_app + """',/" -i """ + pref_path + 'setupcenter_pref.py'
+                    move_app_to_new_cat = """sed "s/""" + new_cat \
+                    + """ = \[/""" + new_cat + """ = \['""" + moved_app \
+                    + """',/" -i """ + pref_path + 'setupcenter_pref.py'
                     subprocess.call(move_app_to_new_cat, shell=True)
                     # Append to the new cat*_listore
-                    get_category_content_feedline (moved_app)
+                    get_category_content_feedline(moved_app)
                     stores[new_cat_no].append(cat_feedline)
 
             refresh_displayed_categories()
@@ -938,12 +942,14 @@ class SetupCenter:
         """
         # Get the viewing choice and set it in the preference file
         if self.GlobalViewRadioButton.get_active():
-            set_viewmode = "sed 's/paned/global/' -i " + pref_path + "setupcenter_pref.py"
+            set_viewmode = "sed 's/paned/global/' -i " \
+            + pref_path + "setupcenter_pref.py"
             subprocess.call(set_viewmode, shell=True)
             self.PanedView.hide()
             self.GlobalView.show()
         elif self.PanedViewRadioButton.get_active():
-            set_viewmode = "sed 's/global/paned/' -i " + pref_path + "setupcenter_pref.py"
+            set_viewmode = "sed 's/global/paned/' -i " \
+            + pref_path + "setupcenter_pref.py"
             subprocess.call(set_viewmode, shell=True)
             self.GlobalView.hide()
             self.PanedView.show()
@@ -973,7 +979,8 @@ class SetupCenter:
         try:
             path = self.CategoryIconView.get_selected_items()
             iter = self.DisplayedCategoryListStore.get_iter(path[0])
-            new_cat_index = int(self.DisplayedCategoryListStore.get_value(iter, 0).split()[-1]) - 1
+            new_cat_index = int(self.DisplayedCategoryListStore.
+                            get_value(iter, 0).split()[-1]) - 1
             for i in paned_category_views:
                 i.hide()
             paned_category_views[new_cat_index].show()
@@ -1010,7 +1017,8 @@ class SetupCenter:
                 ).splitlines():
                 if 'root' not in line:
                     reg_user = line.split(' ')[0]
-                    to_execute = "su -l " + reg_user + ' -c "' + selected_action + '"'
+                    to_execute = "su -l " + reg_user + ' -c "' \
+                    + selected_action + '"'
         if relevant_liststore.get_value(iter, 3) is False:
             utility_process = subprocess.Popen(to_execute, shell=True)
         if relevant_liststore.get_value(iter, 3) is True:
@@ -1030,7 +1038,9 @@ class SetupCenter:
             utility_process_list.pop(0).kill()
         # Window size to remember
         window_x, window_y = self.MainWindow.get_size()
-        remembered_size = """sed "s|\(main_window_size = \)(.*)|\\1(""" + str(window_x) + "," + str(window_y) + """)|" -i """ + pref_path + 'setupcenter_pref.py'
+        remembered_size = """sed "s|\(main_window_size = \)\
+        (.*)|\\1(""" + str(window_x) + "," + str(window_y) + """)|" -i """ \
+        + pref_path + 'setupcenter_pref.py'
         subprocess.call(remembered_size, shell=True)
         gtk.main_quit()
 
@@ -1043,7 +1053,9 @@ class SetupCenter:
             utility_process_list.pop(0).kill()
         # Window size to remember
         window_x, window_y = self.MainWindow.get_size()
-        remembered_size = """sed "s|\(main_window_size = \)(.*)|\\1(""" + str(window_x) + "," + str(window_y) + """)|" -i """ + pref_path + 'setupcenter_pref.py'
+        remembered_size = """sed "s|\(main_window_size = \)\
+        (.*)|\\1(""" + str(window_x) + "," + str(window_y) + """)|" -i """ \
+        + pref_path + 'setupcenter_pref.py'
         subprocess.call(remembered_size, shell=True)
         gtk.main_quit()
 
@@ -1052,7 +1064,8 @@ if __name__ == '__main__':
     # Checks for root privileges
     if os.getuid() != 0:
         error_dialog(
-            _("<b>Sorry!</b>\n\nRoot privileges are required to access the Setup Center."
+            _("<b>Sorry!</b>\
+            \n\nRoot privileges are required to access the Setup Center."
             )
         )
         sys.exit(1)
